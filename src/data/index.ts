@@ -22,3 +22,30 @@ export const measures = [
     values: [33.08, 37.07, 110.77, 94.76, 513.18, 143.3, 120.2, 205]
   }
 ];
+
+export const columns = [
+  {
+    name: 'Product',
+    function: 'dimension'
+  },
+  {
+    name: 'Year',
+    function: 'dimension'
+  },
+  {
+    name: 'Country',
+    function: 'dimension'
+  },
+  {
+    name: 'Cost',
+    function: 'measure'
+  },
+  {
+    name: 'Revenue',
+    function: 'measure'
+  },
+  {
+    name: 'Units sold',
+    function: 'measure'
+  }
+];

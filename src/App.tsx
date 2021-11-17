@@ -1,10 +1,14 @@
 import { useMemo, useState } from 'react';
 import 'tailwindcss/tailwind.css';
+import ColumnsSidebar from './components/ColumnsSidebar';
 import ErrorMessage from './components/ErrorMessage';
 import LineRechart from './components/LineRechart';
 import Loading from './components/Loading';
-import { API_URL, COLUMN } from './constants';
+import { COLUMN } from './constants';
+import { API_URL } from './constants/api_url';
 import useFetch from './hooks/useFetch';
+import MainLayout from './layouts/MainLayout';
+import PlotterLayout from './layouts/PlotterLayout';
 import { Column, ColumnData, FetchOptions } from './types';
 
 const App = () => {
@@ -80,44 +84,36 @@ const App = () => {
   };
 
   return (
-    <div className="flex">
-      <div className="flex flex-col">
-        {columnsError ? (
-          <ErrorMessage error={columnsError} />
-        ) : columnsLoading ? (
-          <Loading />
-        ) : (
-          columnsData?.map(column => (
-            <button
-              key={column.name}
-              onClick={() => updateSelectedColumns(column as Column)}
-            >
-              {column.name}
-            </button>
-          ))
-        )}
-      </div>
-      <div className="flex flex-col">
-        <div>Dimension column {dimensionColumn?.name}</div>
-        <div>
-          Measure columns{' '}
-          {measureColumns?.map(col => (
-            <span key={col.name}>{col.name}</span>
-          ))}
-        </div>
-        {error ? (
-          <ErrorMessage error={error} />
-        ) : loading ? (
-          <Loading />
-        ) : dimension ? (
-          <div className="w-80 md:w-[600px] lg:w-[900px] h-80 border border-blue-800">
-            <LineRechart dimension={dimension} measures={measures} />
+    <MainLayout>
+      <PlotterLayout>
+        <ColumnsSidebar
+          loading={columnsLoading}
+          error={columnsError}
+          data={columnsData as Column[]}
+          onClick={(column: Column) => updateSelectedColumns(column)}
+        />
+        <div className="flex flex-col">
+          <div>Dimension column {dimensionColumn?.name}</div>
+          <div>
+            Measure columns{' '}
+            {measureColumns?.map(col => (
+              <span key={col.name}>{col.name}</span>
+            ))}
           </div>
-        ) : (
-          <p>Please select columns</p>
-        )}
-      </div>
-    </div>
+          {error ? (
+            <ErrorMessage error={error} />
+          ) : loading ? (
+            <Loading />
+          ) : dimension ? (
+            <div className="w-80 md:w-[600px] lg:w-[900px] h-80 border border-blue-800">
+              <LineRechart dimension={dimension} measures={measures} />
+            </div>
+          ) : (
+            <p>Please select columns</p>
+          )}
+        </div>
+      </PlotterLayout>
+    </MainLayout>
   );
 };
 
