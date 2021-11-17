@@ -1,5 +1,5 @@
-import { COLUMN } from '../constants';
 import { Column } from '../types';
+import ColumnDndButton from './ColumnDndButton';
 import ErrorMessage from './ErrorMessage';
 import Loading from './Loading';
 
@@ -21,16 +21,7 @@ const ColumnsSidebar: React.FC<Props> = ({ error, loading, data, onClick }) => (
       <Loading />
     ) : (
       data?.map((column: Column) => (
-        <button
-          className="m-2 px-4 py-2 rounded-lg border border-gray-700 flex justify-between items-center hover:bg-gray-700 transition transform hover:-translate-y-1 hover:text-white"
-          key={column.name}
-          onClick={() => onClick(column)}
-        >
-          <span>{column.name}</span>
-          <span className="text-xs italic ml-4">
-            {column.function === COLUMN.DIMENSION ? 'Dimension' : 'Measure'}
-          </span>
-        </button>
+        <ColumnDndButton column={column} key={column.name} onClick={onClick} />
       ))
     )}
   </div>

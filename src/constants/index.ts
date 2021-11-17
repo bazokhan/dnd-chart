@@ -1,4 +1,4 @@
-export const COLUMN = {
-  DIMENSION: 'dimension',
-  MEASURE: 'measure'
-};
+export enum COLUMN {
+  DIMENSION = 'dimension',
+  MEASURE = 'measure'
+}

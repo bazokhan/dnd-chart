@@ -45,9 +45,6 @@ const App = () => {
     !dimensionColumn || !measureColumns?.length
   );
 
-  console.log({ data, loading, error });
-  console.log(columnsData, columnsLoading, columnsError);
-
   const dimension = useMemo(
     () =>
       (data as ColumnData[])?.find(
@@ -68,19 +65,20 @@ const App = () => {
     if (column.function === COLUMN.DIMENSION) {
       // Selected dimension column has to be only one
       setDimensionColumn(column);
-    } else if (column.function === COLUMN.MEASURE) {
+    } else {
       // Selected measure columns can be more than one
       // Remove the measure column if it exists, or add it to the array if it doesn't
       const hasColumn = measureColumns.find(col => col.name === column.name);
       if (!hasColumn) {
         // Push the clicked column
         setMeasureColumns([...measureColumns, column]);
-      } else {
-        // Return all but the clicked column
-        setMeasureColumns(
-          measureColumns.filter(col => col.name !== column.name)
-        );
       }
+      // else {
+      // Return all but the clicked column
+      // setMeasureColumns(
+      //   measureColumns.filter(col => col.name !== column.name)
+      // );
+      // }
     }
   };
 
@@ -96,11 +94,13 @@ const App = () => {
         <div className="flex flex-col w-full px-8">
           <SelectBox
             title="Dimension:"
+            type={COLUMN.DIMENSION}
             items={dimensionColumn ? [dimensionColumn] : []}
             onClear={() => setDimensionColumn(null)}
           />
           <SelectBox
             title="Measures:"
+            type={COLUMN.MEASURE}
             items={measureColumns}
             onClear={() => setMeasureColumns([])}
           />
