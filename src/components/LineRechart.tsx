@@ -14,7 +14,7 @@ import mapApiDataToChartData from '../helpers/mapApiDataToChartData';
 
 import { ColumnData } from '../types';
 
-const colors = ['red', 'green', 'blue', 'orange'];
+const colors = ['#A03B63', '#EA88B9', '#B0DEF5', '#87A1FE'];
 
 type Props = {
   XAxisName?: string;
