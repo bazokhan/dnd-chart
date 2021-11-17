@@ -4,6 +4,7 @@ import ColumnsSidebar from './components/ColumnsSidebar';
 import ErrorMessage from './components/ErrorMessage';
 import LineRechart from './components/LineRechart';
 import Loading from './components/Loading';
+import SelectBox from './components/SelectBox';
 import { COLUMN } from './constants';
 import { API_URL } from './constants/api_url';
 import useFetch from './hooks/useFetch';
@@ -92,14 +93,17 @@ const App = () => {
           data={columnsData as Column[]}
           onClick={(column: Column) => updateSelectedColumns(column)}
         />
-        <div className="flex flex-col">
-          <div>Dimension column {dimensionColumn?.name}</div>
-          <div>
-            Measure columns{' '}
-            {measureColumns?.map(col => (
-              <span key={col.name}>{col.name}</span>
-            ))}
-          </div>
+        <div className="flex flex-col w-full px-8">
+          <SelectBox
+            title="Dimension:"
+            items={dimensionColumn ? [dimensionColumn] : []}
+            onClear={() => setDimensionColumn(null)}
+          />
+          <SelectBox
+            title="Measures:"
+            items={measureColumns}
+            onClear={() => setMeasureColumns([])}
+          />
           {error ? (
             <ErrorMessage error={error} />
           ) : loading ? (
@@ -109,7 +113,9 @@ const App = () => {
               <LineRechart dimension={dimension} measures={measures} />
             </div>
           ) : (
-            <p>Please select columns</p>
+            <p className="px-8 py-16 font-2xl border border-dashed text-gray-400 text-center rounded-lg my-4">
+              Please select columns
+            </p>
           )}
         </div>
       </PlotterLayout>
