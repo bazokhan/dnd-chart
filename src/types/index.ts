@@ -5,13 +5,13 @@ export type Column = {
 
 export type ColumnData = {
   name: string;
-  value: string[] | number[];
+  values: string[] | number[];
 };
 
 export type FetchResponse = {
   loading: boolean;
   error: Error | null;
-  data: Record<string, Column[] | ColumnData[]> | null;
+  data: Column[] | ColumnData[] | null;
 };
 
 export type FetchOptions = {
