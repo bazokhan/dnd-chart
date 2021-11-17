@@ -53,8 +53,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm un tes",
-      "pre-push": "mpm run test"
+      "pre-commit": "yarn test",
+      "pre-push": "yarn test"
     }
   }
 }
