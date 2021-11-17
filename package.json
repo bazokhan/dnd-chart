@@ -6,7 +6,9 @@
     "build": "tsc && vite build",
     "serve": "vite preview",
     "lint": "eslint ./src",
-    "test": "jest ./src"
+    "test": "jest ./src",
+    "storybook": "start-storybook -p 6006 --no-manager-cache",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
     "react": "^17.0.0",
@@ -14,6 +16,12 @@
     "recharts": "^2.1.6"
   },
   "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@storybook/addon-actions": "^6.3.12",
+    "@storybook/addon-essentials": "^6.3.12",
+    "@storybook/addon-links": "^6.3.12",
+    "@storybook/addon-postcss": "^2.0.0",
+    "@storybook/react": "^6.3.12",
     "@testing-library/react": "^12.1.2",
     "@types/d3-scale": "^4.0.2",
     "@types/jest": "^27.0.2",
@@ -24,6 +32,7 @@
     "@typescript-eslint/parser": "^5.4.0",
     "@vitejs/plugin-react": "^1.0.0",
     "autoprefixer": "^10.4.0",
+    "babel-loader": "^8.2.3",
     "eslint": "^8.2.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
@@ -32,6 +41,7 @@
     "husky": "^7.0.4",
     "jest": "^27.3.1",
     "postcss": "^8.3.11",
+    "postcss-loader": "^6.2.0",
     "prettier": "^2.4.1",
     "tailwindcss": "^2.2.19",
     "ts-jest": "^27.0.7",

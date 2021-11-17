@@ -110,7 +110,7 @@ const App = () => {
         ) : loading ? (
           <Loading />
         ) : dimension ? (
-          <div className=" w-80 md:w-[600px] lg:w-[900px] h-80 border border-blue-800">
+          <div className="w-80 md:w-[600px] lg:w-[900px] h-80 border border-blue-800">
             <LineRechart dimension={dimension} measures={measures} />
           </div>
         ) : (
