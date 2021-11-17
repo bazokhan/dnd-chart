@@ -1,7 +1,7 @@
 {
   "endOfLine": "lf",
   "singleQuote": true,
-  "parser": "flow",
+  "parser": "typescript",
   "trailingComma": "none",
   "arrowParens": "avoid",
   "semi": true,
