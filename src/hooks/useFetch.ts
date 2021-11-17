@@ -5,13 +5,15 @@ const defaultOptions: FetchOptions = { method: 'GET' };
 
 const useFetch = (
   url: string,
-  options: FetchOptions = defaultOptions
+  options: FetchOptions = defaultOptions,
+  skip = false
 ): FetchResponse => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
 
   useEffect(() => {
+    if (skip) return;
     setLoading(true);
     fetch(url, options)
       .then(res => res.json())
@@ -27,7 +29,7 @@ const useFetch = (
       .finally(() => {
         setLoading(false);
       });
-  }, [options, url]);
+  }, [options, skip, url]);
 
   return { data, loading, error };
 };
