@@ -19,3 +19,5 @@ export type FetchOptions = {
   headers?: HeadersInit;
   body?: BodyInit;
 };
+
+export type DataPoint = Record<string, string | number>;
