@@ -110,7 +110,12 @@ const App = () => {
             <Loading />
           ) : dimension ? (
             <div className="w-80 md:w-[600px] lg:w-[900px] h-80 border border-blue-800">
-              <LineRechart dimension={dimension} measures={measures} />
+              <LineRechart
+                XAxisName={dimension.name}
+                YAxisName={measureColumns?.map(col => col.name).join(' / ')}
+                dimension={dimension}
+                measures={measures}
+              />
             </div>
           ) : (
             <p className="px-8 py-16 font-2xl border border-dashed text-gray-400 text-center rounded-lg my-4">
