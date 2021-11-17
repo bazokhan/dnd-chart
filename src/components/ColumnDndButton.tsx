@@ -14,7 +14,6 @@ const ColumnDndButton: React.FC<Props> = ({ column, onClick }) => {
     end: (item, monitor) => {
       const dropResult = monitor.getDropResult<Column>();
       if (item && dropResult) {
-        console.log(item);
         onClick(item);
       }
     },
