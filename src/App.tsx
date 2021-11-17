@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import logo from './logo.svg';
+import 'tailwindcss/tailwind.css';
 import './App.css';
 
 function App() {
