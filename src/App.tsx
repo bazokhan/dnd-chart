@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import 'tailwindcss/tailwind.css';
 import ErrorMessage from './components/ErrorMessage';
+import LineRechart from './components/LineRechart';
 import Loading from './components/Loading';
 import { API_URL, COLUMN } from './constants';
 import useFetch from './hooks/useFetch';
@@ -41,6 +42,22 @@ const App = () => {
 
   console.log({ data, loading, error });
   console.log(columnsData, columnsLoading, columnsError);
+
+  const dimension = useMemo(
+    () =>
+      (data as ColumnData[])?.find(
+        (col: ColumnData) => col.name === dimensionColumn?.name
+      ),
+    [data, dimensionColumn?.name]
+  );
+
+  const measures = useMemo(
+    () =>
+      (data as ColumnData[])?.filter((col: ColumnData) =>
+        measureColumns?.map(mCol => mCol.name).includes(col.name)
+      ),
+    [data, measureColumns]
+  );
 
   const updateSelectedColumns = (column: Column) => {
     if (column.function === COLUMN.DIMENSION) {
@@ -88,22 +105,17 @@ const App = () => {
             <span key={col.name}>{col.name}</span>
           ))}
         </div>
-        <div className="max-w-lg p-4">
-          {error ? (
-            <ErrorMessage error={error} />
-          ) : loading ? (
-            <Loading />
-          ) : data?.length ? (
-            data.map(col => (
-              <div key={col.name}>
-                <p className="font-bold underline">{col.name}</p>
-                <p>{(col as ColumnData).values.join('-')}</p>
-              </div>
-            ))
-          ) : (
-            <p>Please select columns</p>
-          )}
-        </div>
+        {error ? (
+          <ErrorMessage error={error} />
+        ) : loading ? (
+          <Loading />
+        ) : dimension ? (
+          <div className=" w-80 md:w-[600px] lg:w-[900px] h-80 border border-blue-800">
+            <LineRechart dimension={dimension} measures={measures} />
+          </div>
+        ) : (
+          <p>Please select columns</p>
+        )}
       </div>
     </div>
   );
