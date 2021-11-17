@@ -1,0 +1,11 @@
+{
+    "scss.validate": false,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": false
+    },
+    "editor.formatOnSave": true,
+    "files.exclude": {
+      "**/node_modules": false
+    },
+    "files.eol": "\n",
+}
